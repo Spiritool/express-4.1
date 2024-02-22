@@ -1,5 +1,4 @@
 let mysql = require('mysql');
-
 let connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -7,7 +6,7 @@ let connection = mysql.createConnection({
     database: 'db_pemograman_framework'
 });
 connection.connect(function(error){
-    if(!error){
+    if(!!error){
         console.log(error)
     }else{
         console.log('Connection Success')
