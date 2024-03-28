@@ -5,10 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var flash = require('express-flash');
 var session = require('express-session');
+const MemoryStore = require('session-memory-store')(session);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var kategoriRouter = require('./routes/kategori');
+var produkRouter = require('./routes/produk');
 
 var app = express();
 
@@ -24,11 +26,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   cookie: {
-    maxAge: 6000
+    maxAge: 6000000000,
+    secure: false,
+    httpOnly: true,
+    sameSite: 'strict',
   },
-  store: new session.MemoryStore,
+  store: new MemoryStore,
   saveUninitialized: true,
-  resave: 'true',
+  resave: 'false',
   secret: 'secret'
 }))
 
@@ -37,6 +42,7 @@ app.use(flash())
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/kategori', kategoriRouter)
+app.use('/produk', produkRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

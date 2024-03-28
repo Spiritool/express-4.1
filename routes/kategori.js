@@ -3,6 +3,7 @@ var router = express.Router();
 var connection = require('../config/database.js');
 const Model_Kategori = require('../model/Model_Kategori.js');
 
+
 router.get('/', async function (req, res, next) {
     let rows = await Model_Kategori.getAll();
     res.render('kategori/index', {
@@ -50,6 +51,7 @@ router.post('/update/(:id)', async function (req, res, next) {
             nama_kategori: nama_kategori
         }
         await Model_Kategori.Update(id, Data);
+        console.log(Data);
         req.flash('success', 'Berhasil mengubah data');
         res.redirect('/kategori')
     } catch {

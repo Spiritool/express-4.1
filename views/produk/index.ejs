@@ -1,0 +1,53 @@
+<%- include('../partials/__head.ejs') %>
+
+    <body>
+        <div class="container">
+            <%- include('../partials/__messagess.ejs') %>
+                <h1 class="text-center">Data Produk</h1>
+                <div class="row">
+                    <div class="col">
+                        <a href="/produk/create" class="btn btn-sm btn-success">Tambah</a>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Gambar</th>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">Harga</th>
+                                    <th scope="col">Kategori</th>
+                                    <th colspan="2" scope="col">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i < data.length; i++){ %>
+                                    <tr>
+                                        <th scope="row">
+                                            <%= (i+1) %>
+                                        </th>
+                                        <td>
+                                            <img src="/images/upload/<%= data[i].foto_produk %>" height="100">
+                                        </td>
+                                        <td>
+                                            <%= data[i].nama_produk %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].harga_produk %>
+                                        </td>
+                                        <td>
+                                            <%= data[i].nama_kategori %>
+                                        </td>
+                                        <td>
+                                            <a href="/produk/edit/<%= data[i].id_produk %>"
+                                                class="btn btn-sm btn-warning">Edit</a>
+                                            <a href="/produk/delete/<%= data[i].id_produk %>"
+                                                class="btn btn-sm btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                    <%} %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+
+        <%- include('../partials/__foot.ejs') %>
